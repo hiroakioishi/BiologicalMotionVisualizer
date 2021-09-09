@@ -170,12 +170,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _motionDataImporter: {fileID: 1238101189}
   PlaySpeed: 1
-  _playTimer: 21.13929
-  _isPlay: 1
-  IsLoop: 0
-  EnableDrawAllLines: 0
-  LineWidth: 0.01
-  _isExistMotionData: 1
+  _playTimer: 0
+  IsLoop: 1
+  EnableDrawAllLines: 1
+  DrawBoneLine: 1
+  DrawJointCircle: 1
+  DrawTriangle: 1
+  BoneLineWidth: 0.01
+  JointCircleRadius: 0.1
+  JointColor: {r: 1, g: 0, b: 0.8296218, a: 1}
+  LineColor: {r: 1, g: 1, b: 1, a: 1}
+  TriangleColor: {r: 0.69513196, g: 0.8113208, b: 0, a: 0.6117647}
   InRange:
     serializedVersion: 2
     x: 0
@@ -188,11 +193,19 @@ MonoBehaviour:
     y: 5
     width: 8.888889
     height: -5
-  JointPairList:
-  - Joint0: 0
-    Joint1: 1
+  BonePairList:
+  - Joint0: 1
+    Joint1: 3
+  - Joint0: 4
+    Joint1: 7
+  TrianglePairList:
   - Joint0: 0
     Joint1: 2
+    Joint2: 4
+  - Joint0: 3
+    Joint1: 4
+    Joint2: 5
+  EnableDrawGizmos: 0
 --- !u!23 &272510047
 MeshRenderer:
   m_ObjectHideFlags: 0
