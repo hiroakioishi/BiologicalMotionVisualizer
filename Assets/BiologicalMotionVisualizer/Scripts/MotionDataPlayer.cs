@@ -82,6 +82,8 @@ public class MotionDataPlayer : MonoBehaviour
     /// </summary>
     public Color TriangleColor = Color.white;
 
+    public float2 DebugCirclePos = float2(0, 0);
+
     /// <summary>
     /// AfterEffectsでの座標の範囲
     /// </summary>
@@ -233,7 +235,7 @@ public class MotionDataPlayer : MonoBehaviour
                     int j0 = BonePairList[i].Joint0;
                     int j1 = BonePairList[i].Joint1;
 
-                    if (j0 < layersNum && j1 < layersNum)
+                    if (j0 >= 0 && j0 < layersNum && j1 >= 0 && j1 < layersNum)
                     {
                         var p0 = AEScreenCoordToWorldPos(_motionDataImporter.motionData.layers[BonePairList[i].Joint0].keys[frame].position);
                         var p1 = AEScreenCoordToWorldPos(_motionDataImporter.motionData.layers[BonePairList[i].Joint1].keys[frame].position);
@@ -265,7 +267,6 @@ public class MotionDataPlayer : MonoBehaviour
             }
         }
 
-
         // トライアングルを描画
         if (DrawTriangle)
         {
@@ -278,7 +279,7 @@ public class MotionDataPlayer : MonoBehaviour
                 int j1 = TrianglePairList[i].Joint1;
                 int j2 = TrianglePairList[i].Joint2;
 
-                if (j0 < layersNum && j1 < layersNum && j2 < layersNum)
+                if (j0 >= 0 && j0 < layersNum && j1 >= 0 && j1 < layersNum && j2 >= 0 && j2 < layersNum)
                 {
                     var p0 = AEScreenCoordToWorldPos(_motionDataImporter.motionData.layers[TrianglePairList[i].Joint0].keys[frame].position);
                     var p1 = AEScreenCoordToWorldPos(_motionDataImporter.motionData.layers[TrianglePairList[i].Joint1].keys[frame].position);
@@ -358,13 +359,13 @@ public class MotionDataPlayer : MonoBehaviour
     float Map(float x, float in_min, float in_max, float out_min, float out_max, bool clamp = false)
     {
         if (clamp) x = Mathf.Max(in_min, Mathf.Min(x, in_max));
-        return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+        return ((x - in_min) * (out_max - out_min)) / (in_max - in_min) + out_min;
     }
 
     float3 AEScreenCoordToWorldPos(Position p)
     {
         return float3(
-            Map(p.x, InRange.x, InRange.width, OutRange.x, OutRange.width),
+            Map(p.x, InRange.x, InRange.width,  OutRange.x, OutRange.width),
             Map(p.y, InRange.y, InRange.height, OutRange.y, OutRange.height),
             0.0f
         );
