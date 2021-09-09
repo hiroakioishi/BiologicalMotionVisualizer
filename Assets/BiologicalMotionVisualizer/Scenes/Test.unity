@@ -181,8 +181,8 @@ MonoBehaviour:
   LineColor: {r: 1, g: 1, b: 1, a: 1}
   TriangleColor: {r: 0.69513196, g: 0.8113208, b: 0, a: 0.6117647}
   DebugCirclePos:
-    x: 5
-    y: 1076.45
+    x: 0
+    y: 1080
   InRange:
     serializedVersion: 2
     x: 0
