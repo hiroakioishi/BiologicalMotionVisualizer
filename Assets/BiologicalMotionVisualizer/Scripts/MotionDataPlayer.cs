@@ -107,6 +107,8 @@ public class MotionDataPlayer : MonoBehaviour
     [Header("Debug")]
     public bool EnableDrawGizmos = false;
 
+    public bool IsShowDebugTextOnGUI = false;
+
     [System.Serializable]
     public class BoneJointPair
     {
@@ -120,6 +122,7 @@ public class MotionDataPlayer : MonoBehaviour
         public int Joint0;
         public int Joint1;
         public int Joint2;
+        public Color Color = Color.white;
     }
 
     void Start()
@@ -287,7 +290,7 @@ public class MotionDataPlayer : MonoBehaviour
 
                     p0.z = p1.z = p2.z = 0.1f;
 
-                    GL.Color(TriangleColor);
+                    GL.Color(TrianglePairList[i].Color);
 
                     GL.Vertex(p0);
                     GL.Vertex(p1);
@@ -339,20 +342,23 @@ public class MotionDataPlayer : MonoBehaviour
 
     void OnGUI()
     {
-        var sX = 10;
-        var sY = 10;
-        var dY = 24;
-        var r00 = new Rect(sX, sY + dY * 0, 1024, 32);
-        var r01 = new Rect(sX, sY + dY * 1, 1024, 32);
-        var r02 = new Rect(sX, sY + dY * 2, 1024, 32);
-        var r03 = new Rect(sX, sY + dY * 3, 1024, 32);
-
-        GUI.Label(r00, "isExistMotionData : " + _isExistMotionData.ToString());
-
-        if (_isExistMotionData == true)
+        if (IsShowDebugTextOnGUI)
         {
-            GUI.Label(r01, "framerate : " + _motionDataImporter.motionData.framerate.ToString());
-            GUI.Label(r02, "totalsecond : " + _motionDataImporter.motionData.totalsecond.ToString());
+            var sX = 10;
+            var sY = 10;
+            var dY = 24;
+            var r00 = new Rect(sX, sY + dY * 0, 1024, 32);
+            var r01 = new Rect(sX, sY + dY * 1, 1024, 32);
+            var r02 = new Rect(sX, sY + dY * 2, 1024, 32);
+            var r03 = new Rect(sX, sY + dY * 3, 1024, 32);
+
+            GUI.Label(r00, "isExistMotionData : " + _isExistMotionData.ToString());
+
+            if (_isExistMotionData == true)
+            {
+                GUI.Label(r01, "framerate : " + _motionDataImporter.motionData.framerate.ToString());
+                GUI.Label(r02, "totalsecond : " + _motionDataImporter.motionData.totalsecond.ToString());
+            }
         }
     }
 
